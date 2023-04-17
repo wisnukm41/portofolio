@@ -2,10 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Jobs\SendMailJob;
+use App\Mail\SendMail;
 use App\Models\Image;
 use App\Models\Project;
+use App\Models\Message;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 use Inertia\Response;
@@ -14,10 +18,10 @@ use Illuminate\Support\Str;
 class ProjectController extends Controller
 {
     public function public(): Response
-    {
+    {   
         $props = [
             'title' => 'Home ',
-            'projects' => Project::where('priority', '!=', null)->get(),
+            'projects' => Project::where('priority', '!=', null)->with('images')->get(),
         ];
 
         return Inertia::render('Public/Index', $props);
@@ -25,7 +29,7 @@ class ProjectController extends Controller
 
     public function projects(): Response
     {
-        $projects = Project::paginate(2)->through(function ($item) {
+        $projects = Project::paginate(3)->through(function ($item) {
             return [
                 'id' => $item->id,
                 'name' => $item->name,
@@ -37,9 +41,9 @@ class ProjectController extends Controller
                 'short' => $item->short,
                 'content' => $item->content,
                 'created_at' => $item->created_at,
+                'images' => $item->images
             ];
         });
-
 
         $props = [
             'title' => 'Projects ',
@@ -183,5 +187,50 @@ class ProjectController extends Controller
         Storage::disk('public')->delete($image->image);
 
         return redirect(route('image', $project->id));
+    }
+
+    public function message_store(Request $request) 
+    {
+        $validated = $request->validate(
+            [
+                'name' => 'required|min:5',
+                'email' => 'required|email',
+                'message' => 'required|min:10'
+            ]
+        );
+
+        dispatch(new SendMailJob());
+
+        Message::create($validated);
+    }
+
+    public function message() : Response
+    {
+        $props = [
+            'title' => 'Messages ',
+            'messages' => Message::get(),
+        ];
+
+        return Inertia::render('Messages', $props);
+    }
+
+    public function message_show(Message $message)
+    {
+        $message->read = 1;
+        $message->save();
+
+        $props = [
+            'title' => 'Messages from ' . $message->name,
+            'message' => $message,
+        ];
+
+        return Inertia::render('Message', $props);
+    }
+
+    public function message_destroy(Message $message): RedirectResponse
+    {
+        $message->delete();
+
+        return redirect(route('message'));
     }
 }

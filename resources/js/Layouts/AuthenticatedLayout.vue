@@ -33,8 +33,8 @@ const showingNavigationDropdown = ref(false);
                                     Project
                                 </NavLink>
 
-                                <NavLink :href="route('dashboard')" :active="route().current('admin-project')">
-                                    Project
+                                <NavLink :href="route('message')" :active="route().current('message') || route().current('message.show')">
+                                    Message
                                 </NavLink>
                             </div>
                         </div>

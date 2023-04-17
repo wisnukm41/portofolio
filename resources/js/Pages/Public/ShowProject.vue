@@ -1,9 +1,9 @@
 <template>
     <PublicLayout :title="title">
         <section>
-        <div class="max-w-5xl mx-auto px-2 my-10">
+        <div class="max-w-5xl mx-auto px-2 my-10 min-h-[75vh]">
             <h2 class="text-4xl font-bold mb-10">{{ project.name }}</h2>
-            <div class="sm:flex">
+            <div class="sm:flex" v-if="previewImg">
                 <div 
                   class="preview-img w-full h-96 sm:mr-1 mb-1"
                   :style="{ backgroundImage: 'url(' + previewImg + ')' }" 
@@ -24,7 +24,7 @@
               <div class="rounded-full my-1 px-2 py-1 sm:float-right bg-green-300 inline-block capitalize" v-if="project.type === 'client project'">{{ project.type }}</div>
               <div class="rounded-full my-1 px-2 py-1 sm:float-right bg-red-300 inline-block capitalize" v-if="project.type === 'tutorial project'">{{ project.type }}</div>
               <p class="text-xl mb-1">Tech : {{ project.tags }}</p>
-              <div v-html="project.content"></div>
+              <div v-html="project.content" class="prose"></div>
             </div>
 
         </div>
@@ -42,15 +42,20 @@
     function baseUrl(){
       return window.location.origin + '/storage/';
     }
+    
+    const imgUrl = ref(null);
 
-    const imgUrl = ref(props.images[0].image);
+
+    if(props.images[0] !== undefined){
+       imgUrl.value = props.images[0].image;
+    } 
 
     const previewImg = computed({
       get(){
-        return baseUrl() + imgUrl.value
+        
+        return imgUrl.value ? baseUrl() + imgUrl.value : null;
       }
     })
-
 
     function changeUrl(e){
       imgUrl.value = e.target.dataset.image

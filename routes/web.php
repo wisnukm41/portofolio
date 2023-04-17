@@ -20,6 +20,8 @@ use Inertia\Inertia;
 Route::get('/', [ProjectController::class, 'public'])->name('home');
 Route::get('/projects', [ProjectController::class, 'projects'])->name('projects');
 Route::get('/projects/{slug}', [ProjectController::class, 'show'])->name('project.show');
+Route::post('/message', [ProjectController::class, 'message_store'])->name('message.create');
+
 
 
 Route::middleware(['auth', 'verified'])->group(function () {
@@ -28,6 +30,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/project/{project}/image', [ProjectController::class, 'image'])->name('image');
     Route::post('/project/{project}/image', [ProjectController::class, 'image_store'])->name('image.store');
     Route::delete('/project/{project}/image/{image}', [ProjectController::class, 'image_delete'])->name('image.destroy');
+    Route::get('/message', [ProjectController::class, 'message'])->name('message');
+    Route::get('/message/{message}', [ProjectController::class, 'message_show'])->name('message.show');
+    Route::delete('/message/{message}', [ProjectController::class, 'message_destroy'])->name('message.delete');
 });
 
 

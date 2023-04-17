@@ -92,7 +92,7 @@ onMounted(() => {
                         <InputError :message="form.errors.priority" class="mb-2" />
                         <div>
                             <label class="block mb-2 mt-2 text-sm font-medium text-gray-900">Project Description</label>
-                            <CKEditor @change="updateContent" :edited="project.content"/>
+                            <CKEditor @change="updateContent" :edited="project.content" class="prose"/>
                         </div>
                         <InputError :message="form.errors.content" class="mb-2" />
 
