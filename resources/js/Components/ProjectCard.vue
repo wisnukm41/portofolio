@@ -19,8 +19,8 @@
                 >Demo</a
               >
               <a
-                v-if="project.code"
-                :href="project.code"
+                v-if="project.git"
+                :href="project.git"
                 class="mr-3 py-2 px-5 rounded-full border-2 border-black hover:border-teal-600 hover:bg-white ease-in duration-200"
                 target="_blank"
                 >Code</a

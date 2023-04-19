@@ -29,7 +29,7 @@ class ProjectController extends Controller
 
     public function projects(): Response
     {
-        $projects = Project::paginate(3)->through(function ($item) {
+        $projects = Project::orderBy('created_at','desc')->paginate(3)->through(function ($item) {
             return [
                 'id' => $item->id,
                 'name' => $item->name,

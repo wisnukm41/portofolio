@@ -19,12 +19,29 @@
                   >
                 </div>
             </div>
+            <hr class="h-px my-2 bg-gray-300 border-0 dark:bg-gray-700">
             <div>
               <div class="rounded-full my-1 px-2 py-1 sm:float-right bg-teal-300 inline-block capitalize" v-if="project.type === 'personal project'">{{ project.type }}</div>
               <div class="rounded-full my-1 px-2 py-1 sm:float-right bg-green-300 inline-block capitalize" v-if="project.type === 'client project'">{{ project.type }}</div>
               <div class="rounded-full my-1 px-2 py-1 sm:float-right bg-red-300 inline-block capitalize" v-if="project.type === 'tutorial project'">{{ project.type }}</div>
               <p class="text-xl mb-1">Tech : {{ project.tags }}</p>
               <div v-html="project.content" class="prose"></div>
+            </div>
+            <div class="mt-5">
+              <a v-if="project.demo"
+                :href="project.demo"
+                class="mr-3 py-2 px-5 rounded-full border-2 border-black hover:bg-teal-600 hover:text-white ease-in duration-200"
+                target="_blank"
+                >Demo</a
+              >
+              
+              <a
+                v-if="project.git"
+                :href="project.git"
+                class="mr-3 py-2 px-5 rounded-full border-2 border-black hover:bg-teal-600 hover:text-white ease-in duration-200"
+                target="_blank"
+                >Code</a
+              >
             </div>
 
         </div>
@@ -38,6 +55,7 @@
 
     const props = defineProps(['title','project','images'])
     
+    console.log(props.project.code)
     
     function baseUrl(){
       return window.location.origin + '/storage/';
