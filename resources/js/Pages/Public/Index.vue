@@ -13,8 +13,8 @@
     <section class="wavy py-32 mt-5 sm:mt-10">
       <div class="max-w-5xl mx-auto px-4">
         <h2 class="text-center text-3xl font-bold mb-10">Skill</h2>
-        <div class="md:flex md:justify-around grid grid-cols-4 gap-8">
-          <div class="text-center mx-auto">
+        <div class="md:flex grid grid-cols-4 gap-8">
+          <div>
             <img
               src="/asset/html.svg"
               alt=""
@@ -23,7 +23,7 @@
             />
             <p>HTML</p>
           </div>
-          <div class="text-center mx-auto">
+          <div>
             <img
               src="/asset/css.svg"
               alt=""
@@ -32,7 +32,7 @@
             />
             <p>CSS</p>
           </div>
-          <div class="text-center mx-auto">
+          <div>
             <img
               src="/asset/javascript.svg"
               alt=""
@@ -41,48 +41,57 @@
             />
             <p>Javascript</p>
           </div>
-          <div class="text-center mx-auto">
+          <div>
             <img
               src="/asset/laravel.svg"
               alt=""
               srcset=""
-              class="rounded-lg w-20 h-20 bg-slate-50 p-1"
+              class="rounded-lg w-20 h-20 bg-slate-50"
             />
             <p>Laravel</p>
           </div>
-          <div class="text-center mx-auto">
+          <div>
+            <img
+              src="/asset/vue.svg"
+              alt=""
+              srcset=""
+              class="rounded-lg w-20 h-20 bg-slate-50"
+            />
+            <p>Vue JS</p>
+          </div>
+          <div>
             <img
               src="/asset/boostrap.svg"
               alt=""
               srcset=""
-              class="rounded-lg w-20 h-20 bg-slate-50 p-1"
+              class="rounded-lg w-20 h-20 bg-slate-50"
             />
             <p>Bootstrap</p>
           </div>
-          <div class="text-center mx-auto">
+          <div>
             <img
               src="/asset/tailwindcss.svg"
               alt=""
               srcset=""
-              class="rounded-lg w-20 h-20 bg-slate-50 p-1"
+              class="rounded-lg w-20 h-20 bg-slate-50"
             />
             <p>Tailwindcss</p>
           </div>
-          <div class="text-center mx-auto">
+          <div>
             <img
               src="/asset/mysql.svg"
               alt=""
               srcset=""
-              class="rounded-lg w-20 h-20 bg-slate-50 p-1"
+              class="rounded-lg w-20 h-20 bg-slate-50"
             />
             <p>MySQL</p>
           </div>
-          <div class="text-center mx-auto">
+          <div>
             <img
               src="/asset/git.svg"
               alt=""
               srcset=""
-              class="rounded-lg w-20 h-20 bg-slate-50 p-1"
+              class="rounded-lg w-20 h-20 bg-slate-50"
             />
             <p>GIT</p>
           </div>
@@ -133,6 +142,18 @@
     width: 20rem;
     height: 20rem;
     padding: 1rem;
+  }
+
+  img{
+    padding: 2px;
+  }
+
+  .grid p {
+    text-align: center;
+  }
+
+  .grid > div{
+    margin-inline: auto;
   }
 
   .wavy {
